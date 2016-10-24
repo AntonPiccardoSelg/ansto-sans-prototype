@@ -35,8 +35,7 @@ class CommandBinding(object):
         self._target.setEnabled(False)
         self._target.clicked.connect(self._target_slot)
 
-        timer = QTimer()
-        self._listener = CommandBinding.GlobalListener(lambda: timer.singleShot(0, self.update))
+        self._listener = CommandBinding.GlobalListener(lambda: QTimer.singleShot(0, self.update))
         ViewModel.add_global_listener(self._listener)
 
     def destroy(self):
