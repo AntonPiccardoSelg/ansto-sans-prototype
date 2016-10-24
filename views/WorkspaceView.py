@@ -11,6 +11,7 @@ from view_models.WorkspaceViewModel import WorkspaceViewModel
 
 
 class WorkspaceView(QtGui.QWidget):
+
     def __init__(self, parent=None):
         super(WorkspaceView, self).__init__(parent)
 

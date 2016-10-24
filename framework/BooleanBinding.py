@@ -6,7 +6,6 @@ from IPropertyListener import IPropertyListener
 class BooleanBinding(IBinding):
 
     class SourceListener(IPropertyListener):
-
         def __init__(self, property, target):
             super(BooleanBinding.SourceListener, self).__init__()
 

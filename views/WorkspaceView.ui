@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>640</height>
+    <width>311</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,7 +18,26 @@
     <widget class="QLineEdit" name="edt_sample"/>
    </item>
    <item>
-    <widget class="QLineEdit" name="edt_sample2"/>
+    <widget class="QComboBox" name="edt_sample2">
+     <property name="editable">
+      <bool>true</bool>
+     </property>
+     <item>
+      <property name="text">
+       <string>Value 1</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Value 2</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Value 3</string>
+      </property>
+     </item>
+    </widget>
    </item>
    <item>
     <widget class="QCheckBox" name="cbx_debug">

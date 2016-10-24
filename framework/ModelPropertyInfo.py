@@ -5,7 +5,6 @@ from IPropertyListener import IPropertyListener
 class ModelPropertyInfo(AbstractPropertyInfo):
 
     class VmListener(IPropertyListener):
-
         def __init__(self, property, listeners):
             super(ModelPropertyInfo.VmListener, self).__init__()
 
@@ -21,7 +20,7 @@ class ModelPropertyInfo(AbstractPropertyInfo):
         super(ModelPropertyInfo, self).__init__()
 
         if not hasattr(model, property):
-            raise ValueError("ModelPropertyInfo: the specified model doesn't have required property \"{0}\"".format(property))
+            raise ValueError("ModelPropertyInfo: the specified model doesn't have the required property \"{0}\"".format(property))
 
         self._model = model
         self._property = property

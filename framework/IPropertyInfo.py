@@ -8,8 +8,7 @@ class IPropertyInfo(object):
     def destroy(self):
         pass
 
-    @property
-    @abc.abstractmethod
+    @abc.abstractproperty
     def name(self):
         pass
 

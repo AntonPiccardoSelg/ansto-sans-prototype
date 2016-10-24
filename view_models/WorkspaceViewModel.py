@@ -63,11 +63,12 @@ class WorkspaceViewModel(ViewModel):
 
             self._model = model
 
+        @property
         def can_execute(self):
             return True
 
         def execute(self):
-            if not self.can_execute():
+            if not self.can_execute:
                 raise RuntimeError("WorkspaceViewModel.LoadModelCommand: command cannot be executed")
 
             def random_name(chars=(string.letters + string.digits), count=5):
@@ -85,11 +86,17 @@ class WorkspaceViewModel(ViewModel):
 
             self._model = model
 
+        @property
         def can_execute(self):
-            return True
+            return \
+                self._model.scattering_sample != "" or \
+                self._model.scattering_empty_cell != "" or \
+                self._model.transmission_empty_cell != "" or \
+                self._model.factor != 0.0 or \
+                self._model.debug_mode
 
         def execute(self):
-            if not self.can_execute():
+            if not self.can_execute:
                 raise RuntimeError("WorkspaceViewModel.ClearModelCommand: command cannot be executed")
 
             self._model.scattering_sample = ""
