@@ -19,6 +19,10 @@ class WorkspaceModel(object):
             pass
 
         @abc.abstractmethod
+        def on_factor_changed(self, model, value):
+            pass
+
+        @abc.abstractmethod
         def on_debug_mode_changed(self, model, value):
             pass
 
@@ -30,6 +34,8 @@ class WorkspaceModel(object):
         self._scattering_sample = ""
         self._scattering_empty_cell = ""
         self._transmission_empty_cell = ""
+
+        self._factor = 0.0
 
         self._debug_mode = False
 
@@ -88,6 +94,19 @@ class WorkspaceModel(object):
         if self._transmission_empty_cell != value:
             self._transmission_empty_cell = value
             self._call_listeners(lambda listener: listener.on_transmission_empty_cell_changed(self, value))
+
+    @property
+    def factor(self):
+        return self._factor
+
+    @factor.setter
+    def factor(self, value):
+        if not isinstance(value, float):
+            raise ValueError("WorkspaceModel: the specified value \"{0}\" is not a float.".format(value))
+
+        if self._factor != value:
+            self._factor = value
+            self._call_listeners(lambda listener: listener.on_factor_changed(self, value))
 
     @property
     def debug_mode(self):

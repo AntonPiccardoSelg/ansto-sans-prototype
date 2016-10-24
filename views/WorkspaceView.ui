@@ -35,6 +35,20 @@
     </widget>
    </item>
    <item>
+    <widget class="QLineEdit" name="edt_factor">
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLineEdit" name="edt_factor2">
+     <property name="alignment">
+      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
     <widget class="QPushButton" name="btn_clear_workspaces">
      <property name="text">
       <string>Clear</string>

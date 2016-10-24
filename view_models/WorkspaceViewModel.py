@@ -1,4 +1,4 @@
-from random import choice
+from random import choice, random
 import string
 
 from framework.ModelPropertyInfo import ModelPropertyInfo
@@ -11,6 +11,7 @@ class WorkspaceViewModel(ViewModel):
     SCATTERING_SAMPLE = 'scattering_sample'
     SCATTERING_EMPTY_CELL = 'scattering_empty_cell'
     TRANSMISSION_EMPTY_CELL = 'transmission_empty_cell'
+    FACTOR = 'factor'
     DEBUG_MODE = 'debug_mode'
 
     class ModelListener(WorkspaceModel.IListener):
@@ -27,6 +28,9 @@ class WorkspaceViewModel(ViewModel):
         def on_transmission_empty_cell_changed(self, model, value):
             self._vm.notify_property_changed(model, WorkspaceViewModel.TRANSMISSION_EMPTY_CELL, value)
 
+        def on_factor_changed(self, model, value):
+            self._vm.notify_property_changed(model, WorkspaceViewModel.FACTOR, value)
+
         def on_debug_mode_changed(self, model, value):
             self._vm.notify_property_changed(model, WorkspaceViewModel.DEBUG_MODE, value)
 
@@ -41,6 +45,7 @@ class WorkspaceViewModel(ViewModel):
         self.scattering_sample_property = ModelPropertyInfo(self, model, WorkspaceViewModel.SCATTERING_SAMPLE)
         self.scattering_empty_cell_property = ModelPropertyInfo(self, model, WorkspaceViewModel.SCATTERING_EMPTY_CELL)
         self.transmission_empty_cell_property = ModelPropertyInfo(self, model, WorkspaceViewModel.TRANSMISSION_EMPTY_CELL)
+        self.factor_property = ModelPropertyInfo(self, model, WorkspaceViewModel.FACTOR)
         self.debug_mode_property = ModelPropertyInfo(self, model, WorkspaceViewModel.DEBUG_MODE)
 
         self.load_model_command = WorkspaceViewModel.LoadModelCommand(self._model)
@@ -71,6 +76,7 @@ class WorkspaceViewModel(ViewModel):
             self._model.scattering_sample = random_name()
             self._model.scattering_empty_cell = random_name()
             self._model.transmission_empty_cell = random_name()
+            self._model.factor = random()
             self._model.debug_mode = True
 
     class ClearModelCommand(ICommand):
@@ -89,4 +95,5 @@ class WorkspaceViewModel(ViewModel):
             self._model.scattering_sample = ""
             self._model.scattering_empty_cell = ""
             self._model.transmission_empty_cell = ""
+            self._model.factor = 0.0
             self._model.debug_mode = False
