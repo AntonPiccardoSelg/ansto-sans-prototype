@@ -34,6 +34,10 @@ The Bilby Gui depends on [Mantid's](http://www.mantidproject.org/Main_Page) Pyth
 As mentioned above, the Bilby Gui depends on Manitd's Python. There are several helper scripts which allow you to run the Bilby Gui
 without opening MantidPlot. They are platform (Windows/Linux) specific and are discussed below.
 
+There are some packages required which are not provided by Mantid's Python and
+will have to install them via
+`pip install -r path_to_bilby_gui/pip-requirements-dev.txt`.
+
 #### Windows
 
 For Windows the Bilby Gui assumes by default that you have a version of Mantid installed here: `C:\MantidInstall\`.
