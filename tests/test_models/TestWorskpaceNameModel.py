@@ -2,13 +2,12 @@ import unittest
 import mock
 
 from nose.tools import raises
-from models.WorkspaceModel import WorkspaceModel
+from models.WorkspaceNameModel import WorkspaceNameModel
 
 
-class TestWorkspaceModel(unittest.TestCase):
-
+class TestWorkspaceNameModel(unittest.TestCase):
     def setUp(self):
-        self.model = WorkspaceModel()
+        self.model = WorkspaceNameModel()
 
     def test_setting_valid_filenames(self):
         test_path = "@path"
@@ -53,7 +52,7 @@ class TestWorkspaceModel(unittest.TestCase):
 
     def test_valid_listener(self):
         test_path = "@path"
-        listener = mock.create_autospec(WorkspaceModel.IListener)
+        listener = mock.create_autospec(WorkspaceNameModel.IListener)
 
         # test add_listener
         self.model.add_listener(listener)

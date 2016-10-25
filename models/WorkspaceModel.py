@@ -1,66 +1,17 @@
 import abc
+from mantid.api import IEventWorkspace
 
 
 class WorkspaceModel(object):
-
-    class IListener(object):
-        __metaclass__ = abc.ABCMeta
-
-        @abc.abstractmethod
-        def on_scattering_sample_changed(self, model, value):
-            pass
-
-        @abc.abstractmethod
-        def on_scattering_empty_cell_changed(self, model, value):
-            pass
-
-        @abc.abstractmethod
-        def on_transmission_empty_cell_changed(self, model, value):
-            pass
-
-        @abc.abstractmethod
-        def on_factor_changed(self, model, value):
-            pass
-
-        @abc.abstractmethod
-        def on_debug_mode_changed(self, model, value):
-            pass
-
     def __init__(self):
         super(WorkspaceModel, self).__init__()
+        self._scattering_sample = None
+        self._scattering_empty_cell = None
+        self._transmission_empty_cell = None
 
-        self._listeners = []
-
-        self._scattering_sample = ""
-        self._scattering_empty_cell = ""
-        self._transmission_empty_cell = ""
-
-        self._factor = 0.0
-
-        self._debug_mode = False
-
-    def add_listener(self, listener):
-        if not isinstance(listener, WorkspaceModel.IListener):
-            raise ValueError("WorkspaceModel: the specified listener is not of type IListener")
-        if listener in self._listeners:
-            raise ValueError("WorkspaceModel: the specified listener is already registered")
-
-        self._listeners.append(listener)
-
-    def remove_listener(self, listener):
-        if listener not in self._listeners:
-            raise ValueError("WorkspaceModel: the specified listener is not registered")
-
-        self._listeners.remove(listener)
-
-    def _call_listeners(self, target):
-        for listener in self._listeners:
-            target(listener)
-
-    @staticmethod
-    def _validate_filename(value):
-        if not isinstance(value, str):
-            raise ValueError("WorkspaceModel: the specified file \"{0}\" is invalid.".format(value))
+    def _validate_workspace(self, workspace):
+        if not isinstance(workspace, IEventWorkspace):
+            raise ValueError("WorkspaceModel: The specified workspace is not an EventWorkspace.")
 
     @property
     def scattering_sample(self):
@@ -68,10 +19,8 @@ class WorkspaceModel(object):
 
     @scattering_sample.setter
     def scattering_sample(self, value):
-        WorkspaceModel._validate_filename(value)
-        if self._scattering_sample != value:
-            self._scattering_sample = value
-            self._call_listeners(lambda listener: listener.on_scattering_sample_changed(self, value))
+        self._validate_workspace(value)
+        self._scattering_sample = value
 
     @property
     def scattering_empty_cell(self):
@@ -79,10 +28,8 @@ class WorkspaceModel(object):
 
     @scattering_empty_cell.setter
     def scattering_empty_cell(self, value):
-        WorkspaceModel._validate_filename(value)
-        if self._scattering_empty_cell != value:
-            self._scattering_empty_cell = value
-            self._call_listeners(lambda listener: listener.on_scattering_empty_cell_changed(self, value))
+        self._validate_workspace(value)
+        self._scattering_empty_cell = value
 
     @property
     def transmission_empty_cell(self):
@@ -90,33 +37,5 @@ class WorkspaceModel(object):
 
     @transmission_empty_cell.setter
     def transmission_empty_cell(self, value):
-        WorkspaceModel._validate_filename(value)
-        if self._transmission_empty_cell != value:
-            self._transmission_empty_cell = value
-            self._call_listeners(lambda listener: listener.on_transmission_empty_cell_changed(self, value))
-
-    @property
-    def factor(self):
-        return self._factor
-
-    @factor.setter
-    def factor(self, value):
-        if not isinstance(value, float):
-            raise ValueError("WorkspaceModel: the specified value \"{0}\" is not a float.".format(value))
-
-        if self._factor != value:
-            self._factor = value
-            self._call_listeners(lambda listener: listener.on_factor_changed(self, value))
-
-    @property
-    def debug_mode(self):
-        return self._debug_mode
-
-    @debug_mode.setter
-    def debug_mode(self, value):
-        if not isinstance(value, bool):
-            raise ValueError("WorkspaceModel: the specified value \"{0}\" is not a boolean.".format(value))
-
-        if self._debug_mode != value:
-            self._debug_mode = value
-            self._call_listeners(lambda listener: listener.on_debug_mode_changed(self, value))
+        self._validate_workspace(value)
+        self._transmission_empty_cell = value
