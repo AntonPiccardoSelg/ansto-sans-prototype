@@ -4,7 +4,7 @@ import string
 from framework.ModelPropertyInfo import ModelPropertyInfo
 from framework.ViewModel import ViewModel
 from framework.ICommand import ICommand
-from models.WorkspaceModel import WorkspaceModel
+from models.WorkspaceNameModel import WorkspaceNameModel
 
 
 class WorkspaceViewModel(ViewModel):
@@ -14,7 +14,7 @@ class WorkspaceViewModel(ViewModel):
     FACTOR = 'factor'
     DEBUG_MODE = 'debug_mode'
 
-    class ModelListener(WorkspaceModel.IListener):
+    class ModelListener(WorkspaceNameModel.IListener):
         def __init__(self, vm):
             super(WorkspaceViewModel.ModelListener, self).__init__()
             self._vm = vm

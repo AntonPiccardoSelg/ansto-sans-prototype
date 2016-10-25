@@ -6,7 +6,7 @@ from framework.CommandBinding import CommandBinding
 from framework.BooleanBinding import BooleanBinding
 from framework.TextBinding import TextBinding
 from framework.IValueConverter import IValueConverter
-from models.WorkspaceModel import WorkspaceModel
+from models.WorkspaceNameModel import WorkspaceNameModel
 from view_models.WorkspaceViewModel import WorkspaceViewModel
 
 
@@ -19,7 +19,7 @@ class WorkspaceView(QtGui.QWidget):
         self.setupUi()
 
     def setupModel(self):
-        self.model = WorkspaceModel()
+        self.model = WorkspaceNameModel()
         self.vm = WorkspaceViewModel(self.model)
 
     def setupUi(self):
