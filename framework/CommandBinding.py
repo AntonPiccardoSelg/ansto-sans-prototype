@@ -30,7 +30,7 @@ class CommandBinding(object):
 
         self._command = command
         self._target = target
-        self._target_slot = lambda: command.execute() if command.can_execute else None
+        self._target_slot = lambda: command.execute() if command.can_execute() else None
 
         self._target.setEnabled(False)
         self._target.clicked.connect(self._target_slot)
@@ -49,7 +49,7 @@ class CommandBinding(object):
                 self._listener = None
 
     def update(self):
-        can_execute = self._command.can_execute
+        can_execute = self._command.can_execute()
         if self._target.isEnabled() != can_execute:
             self._target.setEnabled(can_execute)
 

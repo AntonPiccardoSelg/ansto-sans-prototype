@@ -4,7 +4,7 @@ import abc
 class ICommand(object):
     __metaclass__ = abc.ABCMeta
 
-    @abc.abstractproperty
+    @abc.abstractmethod
     def can_execute(self):
         pass
 
