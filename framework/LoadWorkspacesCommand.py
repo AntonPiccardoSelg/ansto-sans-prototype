@@ -156,4 +156,4 @@ class LoadWorkspacesCommand(ICommand):
     @staticmethod
     def _load_workspace(file_name, workspace_name):
         Load(Filename=file_name, OutputWorkspace=workspace_name)
-        return AnalysisDataService.retrieve[workspace_name]
+        return AnalysisDataService.retrieve(workspace_name)
